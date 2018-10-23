@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Christ3D.Infrastruct.Data\Christ3D.Infrastruct.Data.csproj" />
+  </ItemGroup>
+
+</Project>
