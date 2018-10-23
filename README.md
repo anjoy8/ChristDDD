@@ -1,5 +1,18 @@
 # ChristDDD
 一个基于 DDD 领域驱动设计 + CQRS 命令查询职责分离 的 .net core 框架
+*********************************************************
+
+
+三大平台同步直播
+
+简  书：https://www.jianshu.com/notebooks/28621653
+
+博客园：https://www.cnblogs.com/laozhang-is-phi/p/9806335.html
+
+ 
+ 码云：https://gitee.com/laozhangIsPhi/ChristDDD
+
+****************************************************************
 
 系统环境
 
