@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Christ3D.Application.ViewModels
 {
-    public class CustomerViewModel
+    public class StudentViewModel
     {
         [Key]
         public Guid Id { get; set; }

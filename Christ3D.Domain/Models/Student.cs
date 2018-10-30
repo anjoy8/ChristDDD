@@ -2,10 +2,10 @@
 
 namespace Christ3D.Domain.Models
 {
-    public class Customer
+    public class Student
     {
-        protected Customer() { }
-        public Customer(Guid id, string name, string email, DateTime birthDate)
+        protected Student() { }
+        public Student(Guid id, string name, string email, DateTime birthDate)
         {
             Id = id;
             Name = name;
@@ -18,6 +18,7 @@ namespace Christ3D.Domain.Models
         public string Name { get; private set; }
 
         public string Email { get; private set; }
+        public string Phone { get; private set; }
 
         public DateTime BirthDate { get; private set; }
     }

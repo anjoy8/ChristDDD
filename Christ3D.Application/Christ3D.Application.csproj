@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Christ3D.Infrastruct.Data\Christ3D.Infrastruct.Data.csproj" />
   </ItemGroup>
 
