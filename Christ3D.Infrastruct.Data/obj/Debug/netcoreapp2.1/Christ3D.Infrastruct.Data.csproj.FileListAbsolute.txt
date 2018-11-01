@@ -10,3 +10,5 @@ E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Infrastruct.Data\obj\Debug\ne
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Infrastruct.Data\obj\Debug\netcoreapp2.1\Christ3D.Infrastruct.Data.csproj.CopyComplete
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Infrastruct.Data\obj\Debug\netcoreapp2.1\Christ3D.Infrastruct.Data.dll
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Infrastruct.Data\obj\Debug\netcoreapp2.1\Christ3D.Infrastruct.Data.pdb
+E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Infrastruct.Data\bin\Debug\netcoreapp2.1\Christ3D.Domain.Core.dll
+E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Infrastruct.Data\bin\Debug\netcoreapp2.1\Christ3D.Domain.Core.pdb

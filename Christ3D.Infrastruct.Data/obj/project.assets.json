@@ -980,11 +980,24 @@
       "Christ3D.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "Christ3D.Domain.Core": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Christ3D.Domain.dll": {}
         },
         "runtime": {
           "bin/placeholder/Christ3D.Domain.dll": {}
+        }
+      },
+      "Christ3D.Domain.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Christ3D.Domain.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Christ3D.Domain.Core.dll": {}
         }
       }
     }
@@ -3571,6 +3584,11 @@
       "type": "project",
       "path": "../Christ3D.Domain/Christ3D.Domain.csproj",
       "msbuildProject": "../Christ3D.Domain/Christ3D.Domain.csproj"
+    },
+    "Christ3D.Domain.Core/1.0.0": {
+      "type": "project",
+      "path": "../Christ3D.Domain.Core/Christ3D.Domain.Core.csproj",
+      "msbuildProject": "../Christ3D.Domain.Core/Christ3D.Domain.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {

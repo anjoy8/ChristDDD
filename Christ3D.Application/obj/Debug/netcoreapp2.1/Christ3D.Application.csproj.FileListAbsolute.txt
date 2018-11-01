@@ -12,3 +12,5 @@ E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Application\bin\Debug\netcore
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Application\bin\Debug\netcoreapp2.1\Christ3D.Domain.pdb
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Application\obj\Debug\netcoreapp2.1\Christ3D.Application.csprojAssemblyReference.cache
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Application\obj\Debug\netcoreapp2.1\Christ3D.Application.csproj.CopyComplete
+E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Application\bin\Debug\netcoreapp2.1\Christ3D.Domain.Core.dll
+E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Application\bin\Debug\netcoreapp2.1\Christ3D.Domain.Core.pdb

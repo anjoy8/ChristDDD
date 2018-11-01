@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Christ3D.Domain.Core\Christ3D.Domain.Core.csproj" />
+  </ItemGroup>
+
 </Project>

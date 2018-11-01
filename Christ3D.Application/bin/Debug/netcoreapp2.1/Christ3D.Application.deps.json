@@ -578,8 +578,16 @@
       },
       "System.ValueTuple/4.5.0": {},
       "Christ3D.Domain/1.0.0": {
+        "dependencies": {
+          "Christ3D.Domain.Core": "1.0.0"
+        },
         "runtime": {
           "Christ3D.Domain.dll": {}
+        }
+      },
+      "Christ3D.Domain.Core/1.0.0": {
+        "runtime": {
+          "Christ3D.Domain.Core.dll": {}
         }
       },
       "Christ3D.Infrastruct.Data/1.0.0": {
@@ -1030,6 +1038,11 @@
       "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
     },
     "Christ3D.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Christ3D.Domain.Core/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

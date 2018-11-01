@@ -207,6 +207,16 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "Christ3D.Domain.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Christ3D.Domain.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Christ3D.Domain.Core.dll": {}
+        }
       }
     }
   },
@@ -673,10 +683,16 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "Christ3D.Domain.Core/1.0.0": {
+      "type": "project",
+      "path": "../Christ3D.Domain.Core/Christ3D.Domain.Core.csproj",
+      "msbuildProject": "../Christ3D.Domain.Core/Christ3D.Domain.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "Christ3D.Domain.Core >= 1.0.0",
       "Microsoft.NETCore.App >= 2.1.0"
     ]
   },
@@ -711,7 +727,11 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\my-study\\NetCore\\ChristAL.DDD\\Christ3D\\Christ3D.Domain.Core\\Christ3D.Domain.Core.csproj": {
+              "projectPath": "E:\\my-study\\NetCore\\ChristAL.DDD\\Christ3D\\Christ3D.Domain.Core\\Christ3D.Domain.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

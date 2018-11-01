@@ -7,3 +7,6 @@ E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Domain\obj\Debug\netcoreapp2.
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Domain\obj\Debug\netcoreapp2.1\Christ3D.Domain.AssemblyInfo.cs
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Domain\obj\Debug\netcoreapp2.1\Christ3D.Domain.dll
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Domain\obj\Debug\netcoreapp2.1\Christ3D.Domain.pdb
+E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Domain\bin\Debug\netcoreapp2.1\Christ3D.Domain.Core.dll
+E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Domain\bin\Debug\netcoreapp2.1\Christ3D.Domain.Core.pdb
+E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.Domain\obj\Debug\netcoreapp2.1\Christ3D.Domain.csproj.CopyComplete
