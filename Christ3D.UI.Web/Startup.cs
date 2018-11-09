@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Christ3D.Infra.IoC;
+using Christ3D.UI.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,8 +32,15 @@ namespace Christ3D.UI.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddAutoMapperSetup();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // .NET Core 原生依赖注入
+            // 单写一层用来添加依赖项，从展示层 Presentation 中隔离
+            NativeInjectorBootStrapper.RegisterServices(services);
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
 ﻿using Christ3D.Domain.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Christ3D.Domain.Models
     /// <summary>
     /// 地址
     /// </summary>
+    [Owned]
     public class Address : ValueObject<Address>
     {
         /// <summary>
@@ -31,6 +33,7 @@ namespace Christ3D.Domain.Models
         public string Street { get; private set; }
 
 
+        public Address() { }
         public Address(string province, string city,
             string county, string street, string zip)
         {

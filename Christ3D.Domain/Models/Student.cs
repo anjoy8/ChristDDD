@@ -5,12 +5,14 @@ namespace Christ3D.Domain.Models
 {
     public class Student : Entity
     {
-        protected Student() { }
-        public Student(Guid id, string name, string email, DateTime birthDate)
+        protected Student() {
+        }
+        public Student(Guid id, string name, string email, string phone, DateTime birthDate)
         {
             Id = id;
             Name = name;
             Email = email;
+            Phone = phone;
             BirthDate = birthDate;
         }
         /// <summary>
@@ -31,7 +33,7 @@ namespace Christ3D.Domain.Models
         public DateTime BirthDate { get; private set; }
 
 
-        public Address Address { get; private set; }
+        public Address Address { get;  set; }
 
 
     }

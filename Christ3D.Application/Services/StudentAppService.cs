@@ -33,8 +33,11 @@ namespace Christ3D.Application.Services
 
         public IEnumerable<StudentViewModel> GetAll()
         {
+            //第一种写法 Map
+            return _mapper.Map<IEnumerable<StudentViewModel>>(_StudentRepository.GetAll());
 
-            return (_StudentRepository.GetAll()).ProjectTo<StudentViewModel>();
+            //第二种写法 ProjectTo
+            //return (_StudentRepository.GetAll()).ProjectTo<StudentViewModel>(_mapper.ConfigurationProvider);
         }
 
         public StudentViewModel GetById(Guid id)
@@ -44,7 +47,8 @@ namespace Christ3D.Application.Services
 
         public void Register(StudentViewModel StudentViewModel)
         {
-            //判断是否为空等等 还没有实现
+            //这里引入领域设计中的写命令 还没有实现
+            //请注意这里如果是平时的写法，必须要引入Student领域模型，会造成污染
 
             _StudentRepository.Add(_mapper.Map<Student>(StudentViewModel));
         }
@@ -52,7 +56,6 @@ namespace Christ3D.Application.Services
         public void Update(StudentViewModel StudentViewModel)
         {
             _StudentRepository.Update(_mapper.Map<Student>(StudentViewModel));
-
         }
 
         public void Remove(Guid id)

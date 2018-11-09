@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Christ3D.Application", "Chr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Christ3D.Infrastruct.Data", "Christ3D.Infrastruct.Data\Christ3D.Infrastruct.Data.csproj", "{95E8434E-391B-48B1-B876-7AE1048BBD9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Christ3D.Domain.Core", "Christ3D.Domain.Core\Christ3D.Domain.Core.csproj", "{6778EC7E-6AA0-4192-93B6-B120AD0640AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Christ3D.Domain.Core", "Christ3D.Domain.Core\Christ3D.Domain.Core.csproj", "{6778EC7E-6AA0-4192-93B6-B120AD0640AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Christ3D.Infra.IoC", "Christ3D.Infra.IoC\Christ3D.Infra.IoC.csproj", "{46DE7F78-5CDD-4C9C-ADF3-0CF847272DAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{6778EC7E-6AA0-4192-93B6-B120AD0640AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6778EC7E-6AA0-4192-93B6-B120AD0640AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6778EC7E-6AA0-4192-93B6-B120AD0640AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46DE7F78-5CDD-4C9C-ADF3-0CF847272DAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46DE7F78-5CDD-4C9C-ADF3-0CF847272DAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46DE7F78-5CDD-4C9C-ADF3-0CF847272DAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46DE7F78-5CDD-4C9C-ADF3-0CF847272DAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
