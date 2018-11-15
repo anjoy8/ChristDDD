@@ -35,7 +35,7 @@ namespace Christ3D.Domain.Models
 
         public Address() { }
         public Address(string province, string city,
-            string county, string street, string zip)
+            string county, string street)
         {
             this.Province = province;
             this.City = city;

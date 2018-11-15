@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Christ3D.Domain\Christ3D.Domain.csproj" />
   </ItemGroup>
 

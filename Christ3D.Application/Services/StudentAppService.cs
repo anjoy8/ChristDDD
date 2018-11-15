@@ -33,6 +33,7 @@ namespace Christ3D.Application.Services
 
         public IEnumerable<StudentViewModel> GetAll()
         {
+
             //第一种写法 Map
             return _mapper.Map<IEnumerable<StudentViewModel>>(_StudentRepository.GetAll());
 
@@ -51,6 +52,8 @@ namespace Christ3D.Application.Services
             //请注意这里如果是平时的写法，必须要引入Student领域模型，会造成污染
 
             _StudentRepository.Add(_mapper.Map<Student>(StudentViewModel));
+
+            _StudentRepository.SaveChanges();
         }
 
         public void Update(StudentViewModel StudentViewModel)

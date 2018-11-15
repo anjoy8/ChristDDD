@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Christ3D.Application.Interfaces;
+using Christ3D.Application.ViewModels;
+using Christ3D.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,25 +32,33 @@ namespace Christ3D.UI.Web.Controllers
         }
 
         // GET: Student/Create
+        // 页面
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Student/Create
+        // 方法
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(StudentViewModel studentViewModel)
         {
             try
             {
-                // TODO: Add insert logic here
+                // 视图模型验证
+                if (!ModelState.IsValid)
+                    return View(studentViewModel);
+                // 执行添加方法
+                _studentAppService.Register(studentViewModel);
 
-                return RedirectToAction(nameof(Index));
+                ViewBag.Sucesso = "Student Registered!";
+
+                return View(studentViewModel);
             }
-            catch
+            catch(Exception e)
             {
-                return View();
+                return View(e.Message);
             }
         }
 
