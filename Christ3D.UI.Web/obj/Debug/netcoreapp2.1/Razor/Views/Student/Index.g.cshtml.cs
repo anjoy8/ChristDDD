@@ -79,7 +79,7 @@ using Christ3D.UI.Web.Models;
             WriteLiteral("</h2>\r\n</div>\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n        <div>\r\n            <div class=\"pull-left\">\r\n                ");
             EndContext();
             BeginContext(296, 176, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "27f57bf1881e48abaf01100c992eead7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0f7cda19f7e643028c43e30070d6d349", async() => {
                 BeginContext(343, 125, true);
                 WriteLiteral("\r\n                    <span title=\"Register New\" class=\"glyphicon glyphicon-plus-sign\"></span> Register New\r\n                ");
                 EndContext();
@@ -214,7 +214,7 @@ using Christ3D.UI.Web.Models;
             WriteLiteral("\r\n                </td>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(2128, 182, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9d6d1b457f824607b29562a630af1a74", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "43c710b8bf9d46caa34dcec338b7eccd", async() => {
                 BeginContext(2210, 96, true);
                 WriteLiteral("\r\n                        <span class=\"glyphicon glyphicon-pencil\"></span>\r\n                    ");
                 EndContext();
@@ -251,7 +251,7 @@ using Christ3D.UI.Web.Models;
             WriteLiteral("\r\n\r\n                    ");
             EndContext();
             BeginContext(2334, 188, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e3e6ea36bcb44a86b28d7c45acfc5725", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f5f33833866492cb5445472060a037c", async() => {
                 BeginContext(2422, 96, true);
                 WriteLiteral("\r\n                        <span class=\"glyphicon glyphicon-search\"></span>\r\n                    ");
                 EndContext();
@@ -288,7 +288,7 @@ using Christ3D.UI.Web.Models;
             WriteLiteral("\r\n\r\n                    ");
             EndContext();
             BeginContext(2546, 184, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "df152aa3ab5446a288ef284a14c6e462", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a827718c15254da2b91c6f49cebf4766", async() => {
                 BeginContext(2631, 95, true);
                 WriteLiteral("\r\n                        <span class=\"glyphicon glyphicon-trash\"></span>\r\n                    ");
                 EndContext();

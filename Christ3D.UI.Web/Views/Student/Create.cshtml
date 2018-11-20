@@ -6,8 +6,13 @@
 <form asp-action="Create">
     <div class="form-horizontal">
         <hr />
-        @* Replacing classic Validation Summary to Custom ViewComponent as TagHelper *@
-        <vc:summary />
+        @* 将经典验证摘要替换为自定义视图组件作为标记助手 *@
+
+        @*方式一(可用，但不推荐) @await Component.InvokeAsync("Alerts")*@
+
+        <!-- 如果使用这个方法，请记得在_ViewImports.cshtml 中，导入@addTagHelper "*, Christ3D.UI.Web" -->
+        <vc:alerts />
+
         <div class="form-group">
             <label asp-for="Name" class="col-md-2 control-label"></label>
             <div class="col-md-10">

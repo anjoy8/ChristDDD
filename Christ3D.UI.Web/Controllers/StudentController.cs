@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Christ3D.Application.Interfaces;
 using Christ3D.Application.ViewModels;
+using Christ3D.Domain.Commands;
 using Christ3D.Domain.Models;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +16,7 @@ namespace Christ3D.UI.Web.Controllers
     public class StudentController : Controller
     {
         private readonly IStudentAppService _studentAppService;
+        IValidator<StudentViewModel> _validator;
 
         public StudentController(IStudentAppService studentAppService)
         {
@@ -46,9 +50,28 @@ namespace Christ3D.UI.Web.Controllers
         {
             try
             {
+                ViewBag.ErrorData = null;
                 // 视图模型验证
                 if (!ModelState.IsValid)
                     return View(studentViewModel);
+
+                //添加命令验证
+                RegisterStudentCommand registerStudentCommand = new RegisterStudentCommand(studentViewModel.Name, studentViewModel.Email, studentViewModel.BirthDate, studentViewModel.Phone);
+                
+                //如果命令无效，证明有错误
+                if (!registerStudentCommand.IsValid())
+                {
+                    List<string> errorInfo = new List<string>();
+                    //获取到错误，请思考这个Result从哪里来的 
+                    foreach (var error in registerStudentCommand.ValidationResult.Errors)
+                    {
+                        errorInfo.Add(error.ErrorMessage);
+                    }
+                    //对错误进行记录，还需要抛给前台
+                    ViewBag.ErrorData = errorInfo;
+                    return View(studentViewModel);
+                }
+
                 // 执行添加方法
                 _studentAppService.Register(studentViewModel);
 
@@ -56,7 +79,7 @@ namespace Christ3D.UI.Web.Controllers
 
                 return View(studentViewModel);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return View(e.Message);
             }

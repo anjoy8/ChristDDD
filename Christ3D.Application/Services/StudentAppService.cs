@@ -4,6 +4,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Christ3D.Application.Interfaces;
 using Christ3D.Application.ViewModels;
+using Christ3D.Domain.Commands;
 using Christ3D.Domain.Interfaces;
 using Christ3D.Domain.Models;
 

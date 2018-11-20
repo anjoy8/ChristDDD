@@ -45,3 +45,4 @@ E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.UI.Web\obj\Debug\netcoreapp2.
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.UI.Web\obj\Debug\netcoreapp2.1\Razor\Views\Student\Create.g.cshtml.cs
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.UI.Web\obj\Debug\netcoreapp2.1\Razor\Views\Student\Edit.g.cshtml.cs
 E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.UI.Web\obj\Debug\netcoreapp2.1\Razor\Views\Student\Delete.g.cshtml.cs
+E:\my-study\NetCore\ChristAL.DDD\Christ3D\Christ3D.UI.Web\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Components\alerts\Default.g.cshtml.cs
