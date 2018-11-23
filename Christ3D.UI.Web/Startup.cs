@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Christ3D.Infra.IoC;
 using Christ3D.UI.Web.Extensions;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,6 +36,11 @@ namespace Christ3D.UI.Web
             services.AddAutoMapperSetup();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // Adding MediatR for Domain Events
+            // 领域命令、领域事件等注入
+            // 引用包 MediatR.Extensions.Microsoft.DependencyInjection
+            services.AddMediatR(typeof(Startup));
 
             // .NET Core 原生依赖注入
             // 单写一层用来添加依赖项，从展示层 Presentation 中隔离

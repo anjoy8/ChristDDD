@@ -10,6 +10,7 @@ using Christ3D.Domain.Models;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Christ3D.UI.Web.Controllers
 {
@@ -17,10 +18,12 @@ namespace Christ3D.UI.Web.Controllers
     {
         private readonly IStudentAppService _studentAppService;
         IValidator<StudentViewModel> _validator;
+        private IMemoryCache _cache;
 
-        public StudentController(IStudentAppService studentAppService)
+        public StudentController(IStudentAppService studentAppService, IMemoryCache cache)
         {
             _studentAppService = studentAppService;
+            _cache = cache;
         }
 
         // GET: Student
@@ -50,32 +53,37 @@ namespace Christ3D.UI.Web.Controllers
         {
             try
             {
-                ViewBag.ErrorData = null;
+                _cache.Remove("ErrorData");
+                //ViewBag.ErrorData = null;
                 // 视图模型验证
                 if (!ModelState.IsValid)
                     return View(studentViewModel);
 
-                //添加命令验证
-                RegisterStudentCommand registerStudentCommand = new RegisterStudentCommand(studentViewModel.Name, studentViewModel.Email, studentViewModel.BirthDate, studentViewModel.Phone);
-                
-                //如果命令无效，证明有错误
-                if (!registerStudentCommand.IsValid())
-                {
-                    List<string> errorInfo = new List<string>();
-                    //获取到错误，请思考这个Result从哪里来的 
-                    foreach (var error in registerStudentCommand.ValidationResult.Errors)
-                    {
-                        errorInfo.Add(error.ErrorMessage);
-                    }
-                    //对错误进行记录，还需要抛给前台
-                    ViewBag.ErrorData = errorInfo;
-                    return View(studentViewModel);
-                }
+                #region 删除命令验证
+                ////添加命令验证
+                //RegisterStudentCommand registerStudentCommand = new RegisterStudentCommand(studentViewModel.Name, studentViewModel.Email, studentViewModel.BirthDate, studentViewModel.Phone);
+
+                ////如果命令无效，证明有错误
+                //if (!registerStudentCommand.IsValid())
+                //{
+                //    List<string> errorInfo = new List<string>();
+                //    //获取到错误，请思考这个Result从哪里来的 
+                //    foreach (var error in registerStudentCommand.ValidationResult.Errors)
+                //    {
+                //        errorInfo.Add(error.ErrorMessage);
+                //    }
+                //    //对错误进行记录，还需要抛给前台
+                //    ViewBag.ErrorData = errorInfo;
+                //    return View(studentViewModel);
+                //} 
+                #endregion
 
                 // 执行添加方法
                 _studentAppService.Register(studentViewModel);
 
-                ViewBag.Sucesso = "Student Registered!";
+                var errorData = _cache.Get("ErrorData");
+                if (errorData == null)
+                    ViewBag.Sucesso = "Student Registered!";
 
                 return View(studentViewModel);
             }

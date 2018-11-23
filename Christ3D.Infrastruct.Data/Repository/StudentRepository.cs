@@ -2,6 +2,7 @@
 using Christ3D.Domain.Interfaces;
 using Christ3D.Domain.Models;
 using Christ3D.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Christ3D.Infra.Data.Repository
 {
@@ -18,7 +19,7 @@ namespace Christ3D.Infra.Data.Repository
         //对特例接口进行实现
         public Student GetByEmail(string email)
         {
-            throw new System.NotImplementedException();
+            return DbSet.AsNoTracking().FirstOrDefault(c => c.Email == email);
         }
     }
 }

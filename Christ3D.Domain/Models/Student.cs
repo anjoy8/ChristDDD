@@ -14,6 +14,7 @@ namespace Christ3D.Domain.Models
             Email = email;
             Phone = phone;
             BirthDate = birthDate;
+            Address = new Address();
         }
         /// <summary>
         /// 姓名
