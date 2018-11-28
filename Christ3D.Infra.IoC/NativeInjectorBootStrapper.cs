@@ -26,6 +26,7 @@ namespace Christ3D.Infra.IoC
 
 
             // Domain - Commands
+            // 将命令模型和命令处理程序匹配
             services.AddScoped<IRequestHandler<RegisterStudentCommand, Unit>, StudentCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateStudentCommand, Unit>, StudentCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveStudentCommand, Unit>, StudentCommandHandler>();
