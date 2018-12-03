@@ -17,6 +17,14 @@
  码云：https://gitee.com/laozhangIsPhi/ChristDDD
 
 ****************************************************************
+![流程图1](https://github.com/anjoy8/ChristDDD/blob/master/Christ3D.UI.Web/wwwroot/images/1468246-20181122182320361-566237541.png)
+
+![流程图2](https://github.com/anjoy8/ChristDDD/blob/master/Christ3D.UI.Web/wwwroot/images/WeChat%20Image_20181203111601.png)
+
+![流程图3](https://github.com/anjoy8/ChristDDD/blob/master/Christ3D.UI.Web/wwwroot/images/WeChat%20Image_20181203111555.png)
+
+
+
 
 系统环境
 
