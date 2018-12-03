@@ -1,4 +1,6 @@
-# ChristDDD
+
+![Logo](https://github.com/anjoy8/ChristDDD/blob/master/Christ3D.UI.Web/wwwroot/images/logoddd.png)
+
 一个基于 DDD 领域驱动设计 + CQRS 命令查询职责分离 的 .net core 框架，完全开源，并且有博客教程，地址在下边。
 
 # 给个星星! ⭐️
