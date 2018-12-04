@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using Christ3D.Application.Interfaces;
 using Christ3D.Application.ViewModels;
 using Christ3D.Domain.Commands;
+using Christ3D.Domain.Core.Notifications;
 using Christ3D.Domain.Models;
 using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -19,11 +21,15 @@ namespace Christ3D.UI.Web.Controllers
         private readonly IStudentAppService _studentAppService;
         IValidator<StudentViewModel> _validator;
         private IMemoryCache _cache;
+        // 将领域通知处理程序注入Controller
+        private readonly DomainNotificationHandler _notifications;
 
-        public StudentController(IStudentAppService studentAppService, IMemoryCache cache)
+        public StudentController(IStudentAppService studentAppService, IMemoryCache cache, INotificationHandler<DomainNotification> notifications)
         {
             _studentAppService = studentAppService;
             _cache = cache;
+            // 强类型转换
+            _notifications = (DomainNotificationHandler)notifications;
         }
 
         // GET: Student
@@ -53,7 +59,7 @@ namespace Christ3D.UI.Web.Controllers
         {
             try
             {
-                _cache.Remove("ErrorData");
+                //_cache.Remove("ErrorData");
                 //ViewBag.ErrorData = null;
                 // 视图模型验证
                 if (!ModelState.IsValid)
@@ -81,8 +87,11 @@ namespace Christ3D.UI.Web.Controllers
                 // 执行添加方法
                 _studentAppService.Register(studentViewModel);
 
-                var errorData = _cache.Get("ErrorData");
-                if (errorData == null)
+                //var errorData = _cache.Get("ErrorData");
+                //if (errorData == null)
+
+                // 是否存在消息通知
+                if (!_notifications.HasNotifications())
                     ViewBag.Sucesso = "Student Registered!";
 
                 return View(studentViewModel);

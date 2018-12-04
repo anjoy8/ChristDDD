@@ -4,6 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Christ3D.Domain.Commands;
 using Christ3D.Domain.Core.Bus;
+using Christ3D.Domain.Core.Notifications;
+using Christ3D.Domain.Events;
 using Christ3D.Domain.Interfaces;
 using Christ3D.Domain.Models;
 using MediatR;
@@ -63,14 +65,17 @@ namespace Christ3D.Domain.CommandHandlers
             // 实例化领域模型，这里才真正的用到了领域模型
             // 注意这里是通过构造函数方法实现
             var customer = new Student(Guid.NewGuid(), message.Name, message.Email, message.Phone, message.BirthDate);
-            
+
             // 判断邮箱是否存在
             // 这些业务逻辑，当然要在领域层中（领域命令处理程序中）进行处理
             if (_studentRepository.GetByEmail(customer.Email) != null)
             {
-                //这里对错误信息进行发布，目前采用缓存形式
-                List<string> errorInfo = new List<string>() { "The customer e-mail has already been taken." };
-                Cache.Set("ErrorData", errorInfo);
+                ////这里对错误信息进行发布，目前采用缓存形式
+                //List<string> errorInfo = new List<string>() { "该邮箱已经被使用！" };
+                //Cache.Set("ErrorData", errorInfo);
+
+                //引发错误事件
+                Bus.RaiseEvent(new DomainNotification("", "该邮箱已经被使用！"));
                 return Task.FromResult(new Unit());
             }
 
@@ -83,7 +88,7 @@ namespace Christ3D.Domain.CommandHandlers
                 // 提交成功后，这里需要发布领域事件
                 // 比如欢迎用户注册邮件呀，短信呀等
 
-                // waiting....
+                Bus.RaiseEvent(new StudentRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate, customer.Phone));
             }
 
             return Task.FromResult(new Unit());
@@ -95,6 +100,7 @@ namespace Christ3D.Domain.CommandHandlers
         {
             if (!message.IsValid())
             {
+                NotifyValidationErrors(message);
                 return Task.FromResult(new Unit());
 
             }
@@ -107,6 +113,7 @@ namespace Christ3D.Domain.CommandHandlers
                 if (!existingCustomer.Equals(customer))
                 {
 
+                    Bus.RaiseEvent(new DomainNotification("", "该邮箱已经被使用！"));
                     return Task.FromResult(new Unit());
 
                 }
@@ -117,6 +124,7 @@ namespace Christ3D.Domain.CommandHandlers
             if (Commit())
             {
 
+                Bus.RaiseEvent(new StudentUpdatedEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate, customer.Phone));
             }
 
             return Task.FromResult(new Unit());
@@ -128,6 +136,7 @@ namespace Christ3D.Domain.CommandHandlers
         {
             if (!message.IsValid())
             {
+                NotifyValidationErrors(message);
                 return Task.FromResult(new Unit());
 
             }
@@ -136,6 +145,7 @@ namespace Christ3D.Domain.CommandHandlers
 
             if (Commit())
             {
+                Bus.RaiseEvent(new StudentRemovedEvent(message.Id));
             }
 
             return Task.FromResult(new Unit());

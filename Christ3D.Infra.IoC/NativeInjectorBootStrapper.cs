@@ -3,6 +3,9 @@ using Christ3D.Application.Services;
 using Christ3D.Domain.CommandHandlers;
 using Christ3D.Domain.Commands;
 using Christ3D.Domain.Core.Bus;
+using Christ3D.Domain.Core.Notifications;
+using Christ3D.Domain.EventHandlers;
+using Christ3D.Domain.Events;
 using Christ3D.Domain.Interfaces;
 using Christ3D.Infra.Bus;
 using Christ3D.Infra.Data.Context;
@@ -23,6 +26,17 @@ namespace Christ3D.Infra.IoC
 
             // Domain Bus (Mediator)
             services.AddScoped<IMediatorHandler, InMemoryBus>();
+
+
+            // Domain - Events
+            // 将事件模型和事件处理程序匹配注入
+
+            // 领域通知
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+            // 领域事件
+            services.AddScoped<INotificationHandler<StudentRegisteredEvent>, StudentEventHandler>();
+            services.AddScoped<INotificationHandler<StudentUpdatedEvent>, StudentEventHandler>();
+            services.AddScoped<INotificationHandler<StudentRemovedEvent>, StudentEventHandler>();
 
 
             // Domain - Commands

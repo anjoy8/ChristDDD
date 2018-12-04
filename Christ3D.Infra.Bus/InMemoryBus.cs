@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Christ3D.Domain.Core.Bus;
 using Christ3D.Domain.Core.Commands;
+using Christ3D.Domain.Core.Events;
 using MediatR;
 using MediatR.Internal;
 
@@ -36,11 +37,24 @@ namespace Christ3D.Infra.Bus
         public Task SendCommand<T>(T command) where T : Command
         {
             //这个是正确的
-            //return _mediator.Send(command);//请注意 入参 的类型
+            return _mediator.Send(command);//请注意 入参 的类型
 
             //注意！这个仅仅是用来测试和研究源码的，请开发的时候不要使用这个
-            return Send(command);//请注意 入参 的类型
+            //return Send(command);//请注意 入参 的类型
         }
+
+        /// <summary>
+        /// 引发事件的实现方法
+        /// </summary>
+        /// <typeparam name="T">泛型 继承 Event：INotification</typeparam>
+        /// <param name="event">事件模型，比如StudentRegisteredEvent</param>
+        /// <returns></returns>
+        public Task RaiseEvent<T>(T @event) where T : Event
+        {
+            // MediatR中介者模式中的第二种方法，发布/订阅模式
+            return _mediator.Publish(@event);
+        }
+
 
 
         /// <summary>
