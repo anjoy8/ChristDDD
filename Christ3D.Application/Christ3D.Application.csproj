@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Christ3D.Infrastruct.Data\Christ3D.Infrastruct.Data.csproj" />
+    <ProjectReference Include="..\Christ3D.Infrastruct.Data\Christ3D.Infrastruct.csproj" />
   </ItemGroup>
 
 </Project>

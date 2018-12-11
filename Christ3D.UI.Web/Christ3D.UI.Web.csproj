@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Christ3D.Application\Christ3D.Application.csproj" />
-    <ProjectReference Include="..\Christ3D.Infra.IoC\Christ3D.Infra.IoC.csproj" />
   </ItemGroup>
 
 </Project>

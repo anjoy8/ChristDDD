@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Christ3D.Domain.Core\Christ3D.Domain.Core.csproj" />
     <ProjectReference Include="..\Christ3D.Domain\Christ3D.Domain.csproj" />
   </ItemGroup>
 
