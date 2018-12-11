@@ -1,8 +1,10 @@
-﻿using Christ3D.Application.Interfaces;
+﻿using Christ3D.Application.EventSourcing;
+using Christ3D.Application.Interfaces;
 using Christ3D.Application.Services;
 using Christ3D.Domain.CommandHandlers;
 using Christ3D.Domain.Commands;
 using Christ3D.Domain.Core.Bus;
+using Christ3D.Domain.Core.Events;
 using Christ3D.Domain.Core.Notifications;
 using Christ3D.Domain.EventHandlers;
 using Christ3D.Domain.Events;
@@ -10,6 +12,7 @@ using Christ3D.Domain.Interfaces;
 using Christ3D.Infra.Bus;
 using Christ3D.Infra.Data.Context;
 using Christ3D.Infra.Data.Repository;
+using Christ3D.Infra.Data.Repository.EventSourcing;
 using Christ3D.Infra.Data.UoW;
 using MediatR;
 using Microsoft.Extensions.Caching.Memory;
@@ -21,10 +24,10 @@ namespace Christ3D.Infra.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            // 注入 Application
+            // 注入 应用层Application
             services.AddScoped<IStudentAppService, StudentAppService>();
 
-            // Domain Bus (Mediator)
+            // 命令总线Domain Bus (Mediator)
             services.AddScoped<IMediatorHandler, InMemoryBus>();
 
 
@@ -54,11 +57,16 @@ namespace Christ3D.Infra.IoC
 
 
 
-            // 注入 Infra - Data
+            // 注入 基础设施层 - 数据层
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<StudyContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+
+            // 注入 基础设施层 - 事件溯源
+            services.AddScoped<IEventStoreRepository, EventStoreSQLRepository>();
+            services.AddScoped<IEventStoreService, SqlEventStoreService>();
+            services.AddScoped<EventStoreSQLContext>();
         }
     }
 }

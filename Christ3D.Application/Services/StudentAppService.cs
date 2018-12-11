@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Christ3D.Application.EventSourcedNormalizers;
 using Christ3D.Application.Interfaces;
 using Christ3D.Application.ViewModels;
 using Christ3D.Domain.Commands;
 using Christ3D.Domain.Core.Bus;
 using Christ3D.Domain.Interfaces;
 using Christ3D.Domain.Models;
+using Christ3D.Infra.Data.Repository.EventSourcing;
 
 namespace Christ3D.Application.Services
 {
@@ -19,12 +21,14 @@ namespace Christ3D.Application.Services
     /// </summary>
     public class StudentAppService : IStudentAppService
     {
-        //注意这里是要IoC依赖注入的，还没有实现
+        // 注意这里是要IoC依赖注入的，还没有实现
         private readonly IStudentRepository _StudentRepository;
-        //用来进行DTO
+        // 用来进行DTO
         private readonly IMapper _mapper;
-        //中介者 总线
+        // 中介者 总线
         private readonly IMediatorHandler Bus;
+        // 事件源仓储
+        private readonly IEventStoreRepository _eventStoreRepository;
 
         public StudentAppService(
             IStudentRepository StudentRepository,
@@ -66,13 +70,25 @@ namespace Christ3D.Application.Services
 
         public void Update(StudentViewModel StudentViewModel)
         {
-            _StudentRepository.Update(_mapper.Map<Student>(StudentViewModel));
+            var updateCommand = _mapper.Map<UpdateStudentCommand>(StudentViewModel);
+            Bus.SendCommand(updateCommand);
         }
 
         public void Remove(Guid id)
         {
-            _StudentRepository.Remove(id);
+            var removeCommand = new RemoveStudentCommand(id);
+            Bus.SendCommand(removeCommand);
 
+        }
+
+        /// <summary>
+        /// 获取某一个聚合id下的所有事件，也就是得到了历史记录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IList<StudentHistoryData> GetAllHistory(Guid id)
+        {
+            return StudentHistory.ToJavaScriptCustomerHistory(_eventStoreRepository.All(id));
         }
 
         public void Dispose()

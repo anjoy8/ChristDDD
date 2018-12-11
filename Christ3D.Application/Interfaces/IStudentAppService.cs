@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Christ3D.Application.EventSourcedNormalizers;
 using Christ3D.Application.ViewModels;
 
 namespace Christ3D.Application.Interfaces
@@ -16,5 +17,6 @@ namespace Christ3D.Application.Interfaces
         StudentViewModel GetById(Guid id);
         void Update(StudentViewModel StudentViewModel);
         void Remove(Guid id);
+        IList<StudentHistoryData> GetAllHistory(Guid id);
     }
 }

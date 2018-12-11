@@ -103,49 +103,75 @@ namespace Christ3D.UI.Web.Controllers
         }
 
         // GET: Student/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(Guid? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customerViewModel = _studentAppService.GetById(id.Value);
+
+            if (customerViewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(customerViewModel);
         }
 
         // POST: Student/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(StudentViewModel studentViewModel)
         {
-            try
-            {
-                // TODO: Add update logic here
+            if (!ModelState.IsValid) return View(studentViewModel);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _studentAppService.Update(studentViewModel);
+
+            if (!_notifications.HasNotifications())
+                ViewBag.Sucesso = "Customer Updated!";
+
+            return View(studentViewModel);
         }
 
         // GET: Student/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(Guid? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customerViewModel = _studentAppService.GetById(id.Value);
+
+            if (customerViewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(customerViewModel);
         }
 
         // POST: Student/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult DeleteConfirmed(Guid id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            _studentAppService.Remove(id);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            if (!_notifications.HasNotifications())
+                return View(_studentAppService.GetById(id));
+
+            ViewBag.Sucesso = "Customer Removed!";
+            return RedirectToAction("Index");
+        }
+
+        [Route("history/{id:guid}")]
+        public JsonResult History(Guid id)
+        {
+            var customerHistoryData = _studentAppService.GetAllHistory(id);
+            return Json(customerHistoryData);
         }
     }
 }
