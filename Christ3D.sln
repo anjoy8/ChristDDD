@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Christ3D.Domain", "Christ3D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Christ3D.Application", "Christ3D.Application\Christ3D.Application.csproj", "{96691C00-3342-489D-816C-CB13427D9A3C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Christ3D.Infrastruct", "Christ3D.Infrastruct.Data\Christ3D.Infrastruct.csproj", "{95E8434E-391B-48B1-B876-7AE1048BBD9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Christ3D.Infrastruct", "Christ3D.Infrastruct\Christ3D.Infrastruct.csproj", "{95E8434E-391B-48B1-B876-7AE1048BBD9A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Christ3D.Domain.Core", "Christ3D.Domain.Core\Christ3D.Domain.Core.csproj", "{6778EC7E-6AA0-4192-93B6-B120AD0640AE}"
 EndProject
