@@ -24,7 +24,7 @@ using Christ3D.UI.Web.Models;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5fe8c127612dce13e9c7e27778a82701aac7a499", @"/Views/Student/Edit.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d1f0c2220b5f883baba2179eb1429e6c9530af59", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7bc10d2cd3613cadf0638829f4a9574879b9a8d9", @"/Views/_ViewImports.cshtml")]
     public class Views_Student_Edit : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
