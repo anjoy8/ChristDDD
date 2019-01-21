@@ -1,5 +1,5 @@
 
-![Logo](https://github.com/anjoy8/ChristDDD/blob/master/Christ3D.UI.Web/wwwroot/images/logoddd.png)
+<img src="https://github.com/anjoy8/ChristDDD/blob/master/Christ3D.UI.Web/wwwroot/images/logoddd.png" width="350"  />
 
 一个基于 DDD 领域驱动设计 + CQRS 命令查询职责分离 的 .net core 框架，完全开源，并且有博客教程，地址在下边。
 
@@ -18,8 +18,34 @@
 简  书：https://www.jianshu.com/c/fe7dd7fc5372
  
  码云：https://gitee.com/laozhangIsPhi/ChristDDD
+ 
+ *******
+ ```
+ ```
+ 
+ <h3 id="autoid-2-1-0">目录：</h3><ul>
+<li><a href="https://www.cnblogs.com/laozhang-is-phi/p/9806335.html" target="_blank">一 ║ D3模式设计初探 与 我的计划书</a></li>
+<li><a id="post_title_link_9832684" href="https://www.cnblogs.com/laozhang-is-phi/p/9832684.html">二 ║ DDD入门 &amp; 项目结构粗搭建</a></li>
+<li><a id="post_title_link_9845573" href="https://www.cnblogs.com/laozhang-is-phi/p/9845573.html">三 ║ 简单说说：领域、子域、限界上下文</a></li>
+<li><a id="post_title_link_9872450" href="https://www.cnblogs.com/laozhang-is-phi/p/9872450.html">四 ║一个让你明白DDD的小故事 &amp; EFCore初探</a></li>
+<li><a id="post_title_link_9888502" href="https://www.cnblogs.com/laozhang-is-phi/p/9888502.html">五 ║聚合：实体与值对象 （上）</a></li>
+<li><a id="post_title_link_9916785" href="https://www.cnblogs.com/laozhang-is-phi/p/9916785.html">六 ║聚合 与 聚合根 （下）</a></li>
+<li><a id="post_title_link_9931304" href="https://www.cnblogs.com/laozhang-is-phi/p/9931304.html">七 ║项目第一次实现 &amp; CQRS初探</a></li>
+<li><a id="post_title_link_9962759" href="https://www.cnblogs.com/laozhang-is-phi/p/9962759.html">八 ║剪不断理还乱的 值对象和Dto</a></li>
+<li><a id="post_title_link_9984740" href="https://www.cnblogs.com/laozhang-is-phi/p/9984740.html">九 ║从军事故事中，明白领域命令验证（上）</a></li>
+<li><a id="post_title_link_10000662" href="https://www.cnblogs.com/laozhang-is-phi/p/10000662.html">十 ║领域驱动【实战篇·中】：命令总线Bus分发（一）</a></li>
+<li><a id="post_title_link_10025913" href="https://www.cnblogs.com/laozhang-is-phi/p/10025913.html">十一 ║ 基于源码分析，命令分发的过程（二）</a></li>
+<li><a id="post_title_link_10059878" href="https://www.cnblogs.com/laozhang-is-phi/p/10059878.html">十二 ║ 核心篇【下】：事件驱动EDA 详解</a></li>
+<li><a id="post_title_link_10093444" href="https://www.cnblogs.com/laozhang-is-phi/p/10093444.html">十三 ║ 当事件溯源 遇上 粉丝活动</a></li>
+</ul>
+
+```
+```
 
 ****************************************************************
+主要的流程图，在下边的图中可以体现：
+
+
 ![流程图1](https://github.com/anjoy8/ChristDDD/blob/master/Christ3D.UI.Web/wwwroot/images/1468246-20181122182320361-566237541.png)
 
 ![流程图2](https://github.com/anjoy8/ChristDDD/blob/master/Christ3D.UI.Web/wwwroot/images/WeChat%20Image_20181203111601.png)
