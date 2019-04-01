@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -16,5 +16,8 @@
     <ProjectReference Include="..\Christ3D.Application\Christ3D.Application.csproj" />
     <ProjectReference Include="..\Christ3D.Infrastruct.Identity\Christ3D.Infrastruct.Identity.csproj" />
   </ItemGroup>
+  
+  
+  
 
 </Project>
