@@ -38,58 +38,58 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.Address.Province)
-                    @Html.DisplayFor(modelItem => item.Address.City)
-                    @Html.DisplayFor(modelItem => item.Address.County)
-                    @Html.DisplayFor(modelItem => item.Address.Street)*@
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDate)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Address.Province)
+                            @Html.DisplayFor(modelItem => item.Address.City)
+                            @Html.DisplayFor(modelItem => item.Address.County)
+                            @Html.DisplayFor(modelItem => item.Address.Street)*@
 
-                    @Html.DisplayFor(modelItem => item.County)
-                    @Html.DisplayFor(modelItem => item.Province)
-                    @Html.DisplayFor(modelItem => item.City)
-                    @Html.DisplayFor(modelItem => item.Street)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="Edit" class="btn btn-warning">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
+                        @Html.DisplayFor(modelItem => item.Province)
+                        @Html.DisplayFor(modelItem => item.County)
+                        @Html.DisplayFor(modelItem => item.City)
+                        @Html.DisplayFor(modelItem => item.Street)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Edit" class="btn btn-warning">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
 
-                    <a asp-action="Details" asp-route-id="@item.Id" title="Details" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" title="Details" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
 
-                    <a asp-action="Delete" asp-route-id="@item.Id" title="Delete" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="Delete" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
 
-                    <button type="button" class="btn btn-purple viewbutton" title="History" data-id="@item.Id" data-toggle="modal" data-target="#customerHistory">
-                        <span class="glyphicon glyphicon-time"></span>
-                    </button>
-                </td>
-            </tr>
+                        <button type="button" class="btn btn-purple viewbutton" title="History" data-id="@item.Id" data-toggle="modal" data-target="#studentHistory">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 </div>
-<div class="modal fade" id="customerHistory" role="dialog">
+<div class="modal fade" id="studentHistory" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Customer Data History</h4>
+                <h4 class="modal-title">student Data History</h4>
             </div>
             <div class="modal-body">
-                <p id="customerHistoryData"></p>
+                <p id="studentHistoryData"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -101,6 +101,31 @@
     {
     <script type="text/javascript">
 
-
-        </script>
+        $(".viewbutton").on("click", function () {
+            var customerId = $(this).data('id');
+            $("#studentHistoryData").html("");
+            $.ajax({
+                url: "/history/" + customerId,
+                cache: false
+            }).done(function (data) {
+                var formatHtml = "<table class='table table-striped'>";
+                formatHtml += "<thead><th>Action</th><th>When</th><th>Id</th><th>Name</th><th>E-mail</th><th>Birth Date</th><th>By User</th></thead>";
+                
+                for (var i = 0; i < data.length; i++) {
+                    var change = data[i];
+                    formatHtml += "<tr>";
+                    formatHtml += "<td>" + change.action + "</td>";
+                    formatHtml += "<td>" + change.when + "</td>";
+                    formatHtml += "<td>" + change.id + "</td>";
+                    formatHtml += "<td>" + change.name + "</td>";
+                    formatHtml += "<td>" + change.email + "</td>";
+                    formatHtml += "<td>" + change.birthDate + "</td>";
+                    formatHtml += "<td>" + change.who + "</td>";
+                    formatHtml += "</tr>";
+                }
+                formatHtml += "</table>";
+                $("#studentHistoryData").html(formatHtml);
+            });
+        });
+    </script>
 }

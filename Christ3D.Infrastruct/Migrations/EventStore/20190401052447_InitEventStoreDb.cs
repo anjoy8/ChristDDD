@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Christ3D.Infrastruct.Data.Migrations.EventStoreMigrations
+namespace Christ3D.Infrastruct.Migrations.EventStore
 {
-    public partial class InitialCreate : Migration
+    public partial class InitEventStoreDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,10 +11,10 @@ namespace Christ3D.Infrastruct.Data.Migrations.EventStoreMigrations
                 name: "StoredEvent",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(nullable: false),
                     Action = table.Column<string>(type: "varchar(100)", nullable: true),
                     AggregateId = table.Column<Guid>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    Id = table.Column<Guid>(nullable: false),
                     Data = table.Column<string>(nullable: true),
                     User = table.Column<string>(nullable: true)
                 },

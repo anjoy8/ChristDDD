@@ -12,10 +12,12 @@ namespace Christ3D.Application.EventSourcing
     {
         // 注入我们的仓储接口
         private readonly IEventStoreRepository _eventStoreRepository;
+        private readonly IUser _user;
 
-        public SqlEventStoreService(IEventStoreRepository eventStoreRepository)
+        public SqlEventStoreService(IEventStoreRepository eventStoreRepository, IUser user)
         {
             _eventStoreRepository = eventStoreRepository;
+            _user = user;
         }
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace Christ3D.Application.EventSourcing
             var storedEvent = new StoredEvent(
                 theEvent,
                 serializedData,
-                "Laozhang");
+                _user.Name);
 
             _eventStoreRepository.Store(storedEvent);
         }

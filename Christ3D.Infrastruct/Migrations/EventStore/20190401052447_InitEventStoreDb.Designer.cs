@@ -4,18 +4,20 @@ using Christ3D.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Christ3D.Infrastruct.Data.Migrations.EventStoreMigrations
+namespace Christ3D.Infrastruct.Migrations.EventStore
 {
     [DbContext(typeof(EventStoreSQLContext))]
-    partial class EventStoreSQLContextModelSnapshot : ModelSnapshot
+    [Migration("20190401052447_InitEventStoreDb")]
+    partial class InitEventStoreDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-preview3-35497")
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

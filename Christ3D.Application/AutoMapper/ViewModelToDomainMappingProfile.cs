@@ -20,11 +20,13 @@ namespace Christ3D.Application.AutoMapper
             //这里以后会写领域命令，所以不能和DomainToViewModelMappingProfile写在一起。
             //学生视图模型 -> 添加新学生命令模型
             CreateMap<StudentViewModel, RegisterStudentCommand>()
-                .ConstructUsing(c => new RegisterStudentCommand(c.Name, c.Email, c.BirthDate, c.Phone));
+                .ConstructUsing(c => new RegisterStudentCommand(c.Name, c.Email, c.BirthDate, c.Phone, c.Province, c.City,
+            c.County, c.Street));
 
-            ////学生视图模型 -> 更新学生信息命令模型
-            //CreateMap<StudentViewModel, UpdateStudentCommand>()
-            //    .ConstructUsing(c => new UpdateStudentCommand(c.Id, c.Name, c.Email, c.BirthDate, c.Phone));
+            //学生视图模型 -> 更新学生信息命令模型
+            CreateMap<StudentViewModel, UpdateStudentCommand>()
+                .ConstructUsing(c => new UpdateStudentCommand(c.Id, c.Name, c.Email, c.BirthDate, c.Phone, c.Province, c.City,
+            c.County, c.Street));
         }
     }
 }

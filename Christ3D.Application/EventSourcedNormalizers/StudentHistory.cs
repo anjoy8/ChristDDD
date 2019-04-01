@@ -14,7 +14,7 @@ namespace Christ3D.Application.EventSourcedNormalizers
         public static IList<StudentHistoryData> HistoryData { get; set; }
 
         // 将数据从事件源中获取到list中
-        public static IList<StudentHistoryData> ToJavaScriptCustomerHistory(IList<StoredEvent> storedEvents)
+        public static IList<StudentHistoryData> ToJavaScriptStudentHistory(IList<StoredEvent> storedEvents)
         {
             HistoryData = new List<StudentHistoryData>();
             StudentHistoryDeserializer(storedEvents);
@@ -66,7 +66,7 @@ namespace Christ3D.Application.EventSourcedNormalizers
 
                 switch (e.MessageType)
                 {
-                    case "CustomerRegisteredEvent":
+                    case "StudentRegisteredEvent":
                         values = JsonConvert.DeserializeObject<dynamic>(e.Data);
                         slot.BirthDate = values["BirthDate"];
                         slot.Email = values["Email"];
@@ -77,7 +77,7 @@ namespace Christ3D.Application.EventSourcedNormalizers
                         slot.Id = values["Id"];
                         slot.Who = e.User;
                         break;
-                    case "CustomerUpdatedEvent":
+                    case "StudentUpdatedEvent":
                         values = JsonConvert.DeserializeObject<dynamic>(e.Data);
                         slot.BirthDate = values["BirthDate"];
                         slot.Email = values["Email"];
@@ -88,7 +88,7 @@ namespace Christ3D.Application.EventSourcedNormalizers
                         slot.Id = values["Id"];
                         slot.Who = e.User;
                         break;
-                    case "CustomerRemovedEvent":
+                    case "StudentRemovedEvent":
                         values = JsonConvert.DeserializeObject<dynamic>(e.Data);
                         slot.Action = "Removed";
                         slot.When = values["Timestamp"];

@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Christ3D.Application.Interfaces;
 using Christ3D.Application.ViewModels;
-using Christ3D.Domain.Commands;
 using Christ3D.Domain.Core.Notifications;
-using Christ3D.Domain.Models;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -39,13 +33,26 @@ namespace Christ3D.UI.Web.Controllers
         }
 
         // GET: Student/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var studentViewModel = _studentAppService.GetById(id.Value);
+
+            if (studentViewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(studentViewModel);
         }
 
         // GET: Student/Create
         // 页面
+        [Authorize(Policy = "CanWriteStudentData")]
         public ActionResult Create()
         {
             return View();
@@ -55,6 +62,7 @@ namespace Christ3D.UI.Web.Controllers
         // 方法
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "CanWriteStudentData")]
         public ActionResult Create(StudentViewModel studentViewModel)
         {
             try
@@ -103,6 +111,8 @@ namespace Christ3D.UI.Web.Controllers
         }
 
         // GET: Student/Edit/5
+        [HttpGet]
+        [Authorize(Policy = "CanWriteStudentData")]
         public IActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -110,19 +120,20 @@ namespace Christ3D.UI.Web.Controllers
                 return NotFound();
             }
 
-            var customerViewModel = _studentAppService.GetById(id.Value);
+            var studentViewModel = _studentAppService.GetById(id.Value);
 
-            if (customerViewModel == null)
+            if (studentViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(customerViewModel);
+            return View(studentViewModel);
         }
 
         // POST: Student/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "CanWriteStudentData")]
         public IActionResult Edit(StudentViewModel studentViewModel)
         {
             if (!ModelState.IsValid) return View(studentViewModel);
@@ -130,12 +141,13 @@ namespace Christ3D.UI.Web.Controllers
             _studentAppService.Update(studentViewModel);
 
             if (!_notifications.HasNotifications())
-                ViewBag.Sucesso = "Customer Updated!";
+                ViewBag.Sucesso = "Student Updated!";
 
             return View(studentViewModel);
         }
 
         // GET: Student/Delete/5
+        [Authorize(Policy = "CanWriteOrRemoveStudentData")]
         public IActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -143,19 +155,20 @@ namespace Christ3D.UI.Web.Controllers
                 return NotFound();
             }
 
-            var customerViewModel = _studentAppService.GetById(id.Value);
+            var studentViewModel = _studentAppService.GetById(id.Value);
 
-            if (customerViewModel == null)
+            if (studentViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(customerViewModel);
+            return View(studentViewModel);
         }
 
         // POST: Student/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "CanWriteOrRemoveStudentData")]
         public IActionResult DeleteConfirmed(Guid id)
         {
             _studentAppService.Remove(id);
@@ -163,15 +176,15 @@ namespace Christ3D.UI.Web.Controllers
             if (!_notifications.HasNotifications())
                 return View(_studentAppService.GetById(id));
 
-            ViewBag.Sucesso = "Customer Removed!";
+            ViewBag.Sucesso = "Student Removed!";
             return RedirectToAction("Index");
         }
 
         [Route("history/{id:guid}")]
         public JsonResult History(Guid id)
         {
-            var customerHistoryData = _studentAppService.GetAllHistory(id);
-            return Json(customerHistoryData);
+            var studentHistoryData = _studentAppService.GetAllHistory(id);
+            return Json(studentHistoryData);
         }
     }
 }

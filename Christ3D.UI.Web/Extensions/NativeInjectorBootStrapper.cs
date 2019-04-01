@@ -14,7 +14,12 @@ using Christ3D.Infra.Data.Context;
 using Christ3D.Infra.Data.Repository;
 using Christ3D.Infra.Data.Repository.EventSourcing;
 using Christ3D.Infra.Data.UoW;
+using Christ3D.Infrastruct.Identity.Authorization;
+using Christ3D.Infrastruct.Identity.Models;
+using Christ3D.Infrastruct.Identity.Services;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +29,12 @@ namespace Christ3D.Infra.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
+
+            // ASP.NET HttpContext dependency
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            // ASP.NET Authorization Polices
+            services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
+
             // 注入 应用层Application
             services.AddScoped<IStudentAppService, StudentAppService>();
 
@@ -42,13 +53,13 @@ namespace Christ3D.Infra.IoC
             services.AddScoped<INotificationHandler<StudentRemovedEvent>, StudentEventHandler>();
 
 
-            // Domain - Commands
+            // 领域层 - 领域命令
             // 将命令模型和命令处理程序匹配
             services.AddScoped<IRequestHandler<RegisterStudentCommand, Unit>, StudentCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateStudentCommand, Unit>, StudentCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveStudentCommand, Unit>, StudentCommandHandler>();
 
-            // Domain - Memory
+            // 领域层 - Memory
             services.AddSingleton<IMemoryCache>(factory =>
             {
                 var cache = new MemoryCache(new MemoryCacheOptions());
@@ -67,6 +78,13 @@ namespace Christ3D.Infra.IoC
             services.AddScoped<IEventStoreRepository, EventStoreSQLRepository>();
             services.AddScoped<IEventStoreService, SqlEventStoreService>();
             services.AddScoped<EventStoreSQLContext>();
+
+            // 注入 基础设施层 - Identity Services
+            services.AddTransient<IEmailSender, AuthEmailMessageSender>();
+            services.AddTransient<ISmsSender, AuthSMSMessageSender>();
+
+            // 注入 基础设施层 - Identity
+            services.AddScoped<IUser, AspNetUser>();
         }
     }
 }

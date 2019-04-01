@@ -33,12 +33,14 @@ namespace Christ3D.Application.Services
         public StudentAppService(
             IStudentRepository StudentRepository,
             IMapper mapper,
-            IMediatorHandler bus
+            IMediatorHandler bus,
+            IEventStoreRepository eventStoreRepository
             )
         {
             _StudentRepository = StudentRepository;
             _mapper = mapper;
             Bus = bus;
+            _eventStoreRepository = eventStoreRepository;
         }
 
         public IEnumerable<StudentViewModel> GetAll()
@@ -88,7 +90,7 @@ namespace Christ3D.Application.Services
         /// <returns></returns>
         public IList<StudentHistoryData> GetAllHistory(Guid id)
         {
-            return StudentHistory.ToJavaScriptCustomerHistory(_eventStoreRepository.All(id));
+            return StudentHistory.ToJavaScriptStudentHistory(_eventStoreRepository.All(id));
         }
 
         public void Dispose()

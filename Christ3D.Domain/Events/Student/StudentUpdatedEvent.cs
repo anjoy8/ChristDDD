@@ -12,6 +12,7 @@ namespace Christ3D.Domain.Events
             Email = email;
             BirthDate = birthDate;
             Phone = phone;
+            AggregateId = id;
         }
         public Guid Id { get; set; }
 

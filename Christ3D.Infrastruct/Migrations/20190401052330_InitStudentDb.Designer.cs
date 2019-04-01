@@ -7,17 +7,17 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Christ3D.Infrastruct.Data.Migrations
+namespace Christ3D.Infrastruct.Migrations
 {
     [DbContext(typeof(StudyContext))]
-    [Migration("20181109022014_Init")]
-    partial class Init
+    [Migration("20190401052330_InitStudentDb")]
+    partial class InitStudentDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-preview3-35497")
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -47,6 +47,31 @@ namespace Christ3D.Infrastruct.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("Christ3D.Domain.Models.Student", b =>
+                {
+                    b.OwnsOne("Christ3D.Domain.Models.Address", "Address", b1 =>
+                        {
+                            b1.Property<Guid>("StudentId");
+
+                            b1.Property<string>("City");
+
+                            b1.Property<string>("County");
+
+                            b1.Property<string>("Province");
+
+                            b1.Property<string>("Street");
+
+                            b1.HasKey("StudentId");
+
+                            b1.ToTable("Students");
+
+                            b1.HasOne("Christ3D.Domain.Models.Student")
+                                .WithOne("Address")
+                                .HasForeignKey("Christ3D.Domain.Models.Address", "StudentId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
                 });
 #pragma warning restore 612, 618
         }

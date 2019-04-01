@@ -64,11 +64,13 @@ namespace Christ3D.Domain.CommandHandlers
 
             // 实例化领域模型，这里才真正的用到了领域模型
             // 注意这里是通过构造函数方法实现
-            var customer = new Student(Guid.NewGuid(), message.Name, message.Email, message.Phone, message.BirthDate);
+            var address = new Address(message.Province, message.City,
+            message.County, message.Street);
+            var student = new Student(Guid.NewGuid(), message.Name, message.Email, message.Phone, message.BirthDate, address);
 
             // 判断邮箱是否存在
             // 这些业务逻辑，当然要在领域层中（领域命令处理程序中）进行处理
-            if (_studentRepository.GetByEmail(customer.Email) != null)
+            if (_studentRepository.GetByEmail(student.Email) != null)
             {
                 ////这里对错误信息进行发布，目前采用缓存形式
                 //List<string> errorInfo = new List<string>() { "该邮箱已经被使用！" };
@@ -80,7 +82,7 @@ namespace Christ3D.Domain.CommandHandlers
             }
 
             // 持久化
-            _studentRepository.Add(customer);
+            _studentRepository.Add(student);
 
             // 统一提交
             if (Commit())
@@ -88,7 +90,7 @@ namespace Christ3D.Domain.CommandHandlers
                 // 提交成功后，这里需要发布领域事件
                 // 比如欢迎用户注册邮件呀，短信呀等
 
-                Bus.RaiseEvent(new StudentRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate, customer.Phone));
+                Bus.RaiseEvent(new StudentRegisteredEvent(student.Id, student.Name, student.Email, student.BirthDate, student.Phone));
             }
 
             return Task.FromResult(new Unit());
@@ -105,12 +107,15 @@ namespace Christ3D.Domain.CommandHandlers
 
             }
 
-            var customer = new Student(message.Id, message.Name, message.Email, message.Phone, message.BirthDate);
-            var existingCustomer = _studentRepository.GetByEmail(customer.Email);
 
-            if (existingCustomer != null && existingCustomer.Id != customer.Id)
+            var address = new Address(message.Province, message.City,
+            message.County, message.Street);
+            var student = new Student(message.Id, message.Name, message.Email, message.Phone, message.BirthDate,address);
+            var existingStudent = _studentRepository.GetByEmail(student.Email);
+
+            if (existingStudent != null && existingStudent.Id != student.Id)
             {
-                if (!existingCustomer.Equals(customer))
+                if (!existingStudent.Equals(student))
                 {
 
                     Bus.RaiseEvent(new DomainNotification("", "该邮箱已经被使用！"));
@@ -119,12 +124,12 @@ namespace Christ3D.Domain.CommandHandlers
                 }
             }
 
-            _studentRepository.Update(customer);
+            _studentRepository.Update(student);
 
             if (Commit())
             {
 
-                Bus.RaiseEvent(new StudentUpdatedEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate, customer.Phone));
+                Bus.RaiseEvent(new StudentUpdatedEvent(student.Id, student.Name, student.Email, student.BirthDate, student.Phone));
             }
 
             return Task.FromResult(new Unit());

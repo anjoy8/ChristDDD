@@ -7,14 +7,14 @@ namespace Christ3D.Domain.Models
     {
         protected Student() {
         }
-        public Student(Guid id, string name, string email, string phone, DateTime birthDate)
+        public Student(Guid id, string name, string email, string phone, DateTime birthDate, Address address)
         {
             Id = id;
             Name = name;
             Email = email;
             Phone = phone;
             BirthDate = birthDate;
-            Address = new Address();
+            Address = address;
         }
         /// <summary>
         /// 姓名

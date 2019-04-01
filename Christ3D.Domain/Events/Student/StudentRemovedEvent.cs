@@ -8,6 +8,7 @@ namespace Christ3D.Domain.Events
         public StudentRemovedEvent(Guid id)
         {
             Id = id;
+            AggregateId = id;
         }
 
         public Guid Id { get; set; }

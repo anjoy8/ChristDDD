@@ -1,4 +1,5 @@
 ﻿using System;
+using Christ3D.Domain.Core.Events;
 using FluentValidation.Results;
 using MediatR;
 
@@ -7,7 +8,7 @@ namespace Christ3D.Domain.Core.Commands
     /// <summary>
     /// 抽象命令基类
     /// </summary>
-    public abstract class Command : IRequest
+    public abstract class Command : Message
     {
         //时间戳
         public DateTime Timestamp { get; private set; }

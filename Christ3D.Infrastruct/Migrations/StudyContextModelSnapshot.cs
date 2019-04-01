@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Christ3D.Infrastruct.Data.Migrations
+namespace Christ3D.Infrastruct.Migrations
 {
     [DbContext(typeof(StudyContext))]
     partial class StudyContextModelSnapshot : ModelSnapshot
@@ -15,7 +15,7 @@ namespace Christ3D.Infrastruct.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-preview3-35497")
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -60,6 +60,8 @@ namespace Christ3D.Infrastruct.Data.Migrations
                             b1.Property<string>("Province");
 
                             b1.Property<string>("Street");
+
+                            b1.HasKey("StudentId");
 
                             b1.ToTable("Students");
 
