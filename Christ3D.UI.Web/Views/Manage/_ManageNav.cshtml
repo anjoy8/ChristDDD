@@ -1,5 +1,4 @@
-﻿@using Christ3D.UI.Web.Views.Manage
-@inject Microsoft.AspNetCore.Identity.SignInManager<Christ3D.Infrastruct.Identity.Models.ApplicationUser> SignInManager
+﻿@inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

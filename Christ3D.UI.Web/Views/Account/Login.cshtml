@@ -2,8 +2,8 @@
 @using System.Linq
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Authentication
-@model Christ3D.Infrastruct.Identity.Models.AccountViewModels.LoginViewModel
-@inject Microsoft.AspNetCore.Identity.SignInManager<Christ3D.Infrastruct.Identity.Models.ApplicationUser> SignInManager
+@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
     ViewData["Title"] = "Log in";
