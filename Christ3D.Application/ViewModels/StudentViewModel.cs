@@ -30,6 +30,7 @@ namespace Christ3D.Application.ViewModels
 
         [Required(ErrorMessage = "The Phone is Required")]
         [Phone]
+        //[Compare("ConfirmPhone")]
         [DisplayName("Phone")]
         public string Phone { get; set; }
 
