@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Christ3D.Domain\Christ3D.Domain.csproj" />
+    <ProjectReference Include="..\Christ3D.Infrastruct\Christ3D.Infrastruct.csproj" />
   </ItemGroup>
   
   

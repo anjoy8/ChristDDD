@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Christ3D.Infra.IoC;
+using Christ3D.Infrastruct;
 using Christ3D.Infrastruct.Identity.Authorization;
 using Christ3D.Infrastruct.Identity.Data;
 using Christ3D.Infrastruct.Identity.Models;
@@ -50,7 +51,7 @@ namespace Christ3D.UI.Web
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(File.ReadAllText(Configuration.GetConnectionString("DefaultConnection"))));
+               options.UseSqlServer(DbConfig.InitConn(Configuration.GetConnectionString("DefaultConnection_file"), Configuration.GetConnectionString("DefaultConnection"))));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

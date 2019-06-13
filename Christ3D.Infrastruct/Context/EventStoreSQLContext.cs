@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Christ3D.Domain.Core.Events;
 using Christ3D.Infra.Data.Mappings;
+using Christ3D.Infrastruct;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -31,7 +32,7 @@ namespace Christ3D.Infra.Data.Context
                 .Build();
 
             // 使用默认的sql数据库连接
-            optionsBuilder.UseSqlServer(File.ReadAllText(config.GetConnectionString("DefaultConnection")));
+            optionsBuilder.UseSqlServer(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
         }
     }
 }
