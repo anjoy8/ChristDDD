@@ -37,6 +37,7 @@ namespace Christ3D.Infra.IoC
 
             // 注入 应用层Application
             services.AddScoped<IStudentAppService, StudentAppService>();
+            services.AddScoped<IOrderAppService, OrderAppService>();
 
             // 命令总线Domain Bus (Mediator)
             services.AddScoped<IMediatorHandler, InMemoryBus>();
@@ -59,6 +60,9 @@ namespace Christ3D.Infra.IoC
             services.AddScoped<IRequestHandler<UpdateStudentCommand, Unit>, StudentCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveStudentCommand, Unit>, StudentCommandHandler>();
 
+            services.AddScoped<IRequestHandler<RegisterOrderCommand, Unit>, OrderCommandHandler>();
+
+
             // 领域层 - Memory
             services.AddSingleton<IMemoryCache>(factory =>
             {
@@ -70,6 +74,7 @@ namespace Christ3D.Infra.IoC
 
             // 注入 基础设施层 - 数据层
             services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<StudyContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

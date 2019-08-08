@@ -18,7 +18,11 @@ namespace Christ3D.Application.AutoMapper
                 .ForMember(d => d.Street, o => o.MapFrom(s => s.Address.Street))
                 ;
 
-         
+            CreateMap<Order, OrderViewModel>();
+            CreateMap<OrderItem, OrderItemViewModel>();
+            CreateMap<OrderItemViewModel, OrderItem>();
+
+
         }
     }
 }

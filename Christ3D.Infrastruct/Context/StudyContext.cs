@@ -10,6 +10,8 @@ namespace Christ3D.Infra.Data.Context
     public class StudyContext : DbContext
     {
         public DbSet<Student> Students { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         /// <summary>
         /// 重写自定义Map配置
@@ -19,6 +21,7 @@ namespace Christ3D.Infra.Data.Context
         {
             //对 StudentMap 进行配置
             modelBuilder.ApplyConfiguration(new StudentMap());
+            modelBuilder.ApplyConfiguration(new OrderMap());
 
             base.OnModelCreating(modelBuilder);
         }

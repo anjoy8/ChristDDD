@@ -27,6 +27,11 @@ namespace Christ3D.Application.AutoMapper
             CreateMap<StudentViewModel, UpdateStudentCommand>()
                 .ConstructUsing(c => new UpdateStudentCommand(c.Id, c.Name, c.Email, c.BirthDate, c.Phone, c.Province, c.City,
             c.County, c.Street));
+
+
+            CreateMap<OrderViewModel, Order>();
+
+            CreateMap<OrderViewModel, RegisterOrderCommand>();
         }
     }
 }
