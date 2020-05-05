@@ -52,7 +52,7 @@ namespace Christ3D.UI.Web.Controllers
 
         // GET: Student/Create
         // 页面
-        [Authorize(Policy = "CanWriteStudentData")]
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -62,7 +62,7 @@ namespace Christ3D.UI.Web.Controllers
         // 方法
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "CanWriteStudentData")]
+        [Authorize]
         public ActionResult Create(StudentViewModel studentViewModel)
         {
             try

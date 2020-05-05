@@ -19,7 +19,7 @@ namespace Christ3D.Domain.CommandHandlers
     /// 注意必须要继承接口IRequestHandler<,>，这样才能实现各个命令的Handle方法
     /// </summary>
     public class OrderCommandHandler : CommandHandler,
-        IRequestHandler<RegisterOrderCommand, Unit>
+        IRequestHandler<RegisterOrderCommand, bool>
     {
         // 注入仓储接口
         private readonly IOrderRepository _OrderRepository;
@@ -49,7 +49,7 @@ namespace Christ3D.Domain.CommandHandlers
         // RegisterOrderCommand命令的处理程序
         // 整个命令处理程序的核心都在这里
         // 不仅包括命令验证的收集，持久化，还有领域事件和通知的添加
-        public Task<Unit> Handle(RegisterOrderCommand message, CancellationToken cancellationToken)
+        public Task<bool> Handle(RegisterOrderCommand message, CancellationToken cancellationToken)
         {
             // 命令验证
             if (!message.IsValid())
@@ -57,7 +57,7 @@ namespace Christ3D.Domain.CommandHandlers
                 // 错误信息收集
                 NotifyValidationErrors(message);
                 // 返回，结束当前线程
-                return Task.FromResult(new Unit());
+                return Task.FromResult(false);
             }
 
             // 实例化领域模型，这里才真正的用到了领域模型
@@ -72,7 +72,7 @@ namespace Christ3D.Domain.CommandHandlers
 
                 //引发错误事件
                 Bus.RaiseEvent(new DomainNotification("", "该Name已经被使用！"));
-                return Task.FromResult(new Unit());
+                return Task.FromResult(false);
             }
 
             // 持久化
@@ -87,7 +87,7 @@ namespace Christ3D.Domain.CommandHandlers
                 //Bus.RaiseEvent(new OrderRegisteredEvent(Order.Id, Order.Name, Order.Email, Order.BirthDate, Order.Phone));
             }
 
-            return Task.FromResult(new Unit());
+            return Task.FromResult(true);
 
         }
 

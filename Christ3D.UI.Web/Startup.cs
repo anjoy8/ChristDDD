@@ -1,19 +1,13 @@
-﻿using System.IO;
-using Christ3D.Infra.IoC;
-using Christ3D.Infrastruct;
+﻿using Christ3D.Infra.IoC;
 using Christ3D.Infrastruct.Identity.Authorization;
-using Christ3D.Infrastruct.Identity.Data;
-using Christ3D.Infrastruct.Identity.Models;
 using Christ3D.UI.Web.Extensions;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Christ3D.UI.Web
 {
@@ -26,7 +20,7 @@ namespace Christ3D.UI.Web
            3、update-database -Context StudyContext
            4、update-database -Context EventStoreSQLContext
 
-         二、迁移项目2（一定要切换到 Christ3D.Infrastruct.Identity 项目下，使用 Package Manager Console）：
+         二、迁移项目2【弃用，因为现在是使用IdentityServer4】（一定要切换到 Christ3D.Infrastruct.Identity 项目下，使用 Package Manager Console）：
            1、add-migration InitIdentityDb -Context ApplicationDbContext -o Data/Migrations/ 
            2、update-database -Context ApplicationDbContext
              
@@ -42,6 +36,8 @@ namespace Christ3D.UI.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSameSiteCookiePolicy();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -50,35 +46,22 @@ namespace Christ3D.UI.Web
             });
 
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(DbConfig.InitConn(Configuration.GetConnectionString("DefaultConnection_file"), Configuration.GetConnectionString("DefaultConnection"))));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(o => {
-                    o.LoginPath = new PathString("/login");
-                    o.AccessDeniedPath = new PathString("/home/access-denied");
-                })
-                .AddFacebook(o =>
-                {
-                    o.AppId = Configuration["Authentication:Facebook:AppId"];
-                    o.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-                })
-                .AddGoogle(googleOptions =>
-                {
-                    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-                    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-                });
-
+            // IdentityServer4 注入
+            if (Configuration["Authentication:IdentityServer4:Enabled"].ObjToBool())
+            {
+                System.Console.WriteLine("当前授权模式是:Ids4");
+                services.AddId4OidcSetup(Configuration);
+            }
+            else
+            {
+                System.Console.WriteLine("当前授权模式是:Identity");
+                services.AddIdentitySetup(Configuration);
+            }
 
             // Automapper 注入
             services.AddAutoMapperSetup();
 
-            services.AddMvc();
-
+            services.AddControllersWithViews();
 
             services.AddAuthorization(options =>
             {
@@ -100,8 +83,10 @@ namespace Christ3D.UI.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCookiePolicy();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -112,15 +97,18 @@ namespace Christ3D.UI.Web
             }
 
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+
+            app.UseRouting();
+
             app.UseAuthentication();
+            app.UseAuthorization();
 
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

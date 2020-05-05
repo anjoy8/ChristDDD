@@ -56,11 +56,11 @@ namespace Christ3D.Infra.IoC
 
             // 领域层 - 领域命令
             // 将命令模型和命令处理程序匹配
-            services.AddScoped<IRequestHandler<RegisterStudentCommand, Unit>, StudentCommandHandler>();
-            services.AddScoped<IRequestHandler<UpdateStudentCommand, Unit>, StudentCommandHandler>();
-            services.AddScoped<IRequestHandler<RemoveStudentCommand, Unit>, StudentCommandHandler>();
+            services.AddScoped<IRequestHandler<RegisterStudentCommand, bool>, StudentCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateStudentCommand, bool>, StudentCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveStudentCommand, bool>, StudentCommandHandler>();
 
-            services.AddScoped<IRequestHandler<RegisterOrderCommand, Unit>, OrderCommandHandler>();
+            services.AddScoped<IRequestHandler<RegisterOrderCommand, bool>, OrderCommandHandler>();
 
 
             // 领域层 - Memory

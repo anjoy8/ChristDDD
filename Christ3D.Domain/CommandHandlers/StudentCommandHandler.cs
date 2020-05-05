@@ -19,9 +19,9 @@ namespace Christ3D.Domain.CommandHandlers
     /// 注意必须要继承接口IRequestHandler<,>，这样才能实现各个命令的Handle方法
     /// </summary>
     public class StudentCommandHandler : CommandHandler,
-        IRequestHandler<RegisterStudentCommand, Unit>,
-        IRequestHandler<UpdateStudentCommand, Unit>,
-        IRequestHandler<RemoveStudentCommand, Unit>
+        IRequestHandler<RegisterStudentCommand, bool>,
+        IRequestHandler<UpdateStudentCommand, bool>,
+        IRequestHandler<RemoveStudentCommand, bool>
     {
         // 注入仓储接口
         private readonly IStudentRepository _studentRepository;
@@ -51,7 +51,7 @@ namespace Christ3D.Domain.CommandHandlers
         // RegisterStudentCommand命令的处理程序
         // 整个命令处理程序的核心都在这里
         // 不仅包括命令验证的收集，持久化，还有领域事件和通知的添加
-        public Task<Unit> Handle(RegisterStudentCommand message, CancellationToken cancellationToken)
+        public Task<bool> Handle(RegisterStudentCommand message, CancellationToken cancellationToken)
         {
             // 命令验证
             if (!message.IsValid())
@@ -59,7 +59,7 @@ namespace Christ3D.Domain.CommandHandlers
                 // 错误信息收集
                 NotifyValidationErrors(message);
                 // 返回，结束当前线程
-                return Task.FromResult(new Unit());
+                return Task.FromResult(false);
             }
 
             // 实例化领域模型，这里才真正的用到了领域模型
@@ -78,7 +78,8 @@ namespace Christ3D.Domain.CommandHandlers
 
                 //引发错误事件
                 Bus.RaiseEvent(new DomainNotification("", "该邮箱已经被使用！"));
-                return Task.FromResult(new Unit());
+                return Task.FromResult(false);
+
             }
 
             // 持久化
@@ -93,17 +94,18 @@ namespace Christ3D.Domain.CommandHandlers
                 Bus.RaiseEvent(new StudentRegisteredEvent(student.Id, student.Name, student.Email, student.BirthDate, student.Phone));
             }
 
-            return Task.FromResult(new Unit());
+            return Task.FromResult(true);
+
 
         }
 
         // 同上，UpdateStudentCommand 的处理方法
-        public Task<Unit> Handle(UpdateStudentCommand message, CancellationToken cancellationToken)
+        public Task<bool> Handle(UpdateStudentCommand message, CancellationToken cancellationToken)
         {
             if (!message.IsValid())
             {
                 NotifyValidationErrors(message);
-                return Task.FromResult(new Unit());
+                return Task.FromResult(false);
 
             }
 
@@ -119,7 +121,7 @@ namespace Christ3D.Domain.CommandHandlers
                 {
 
                     Bus.RaiseEvent(new DomainNotification("", "该邮箱已经被使用！"));
-                    return Task.FromResult(new Unit());
+                    return Task.FromResult(false);
 
                 }
             }
@@ -132,17 +134,17 @@ namespace Christ3D.Domain.CommandHandlers
                 Bus.RaiseEvent(new StudentUpdatedEvent(student.Id, student.Name, student.Email, student.BirthDate, student.Phone));
             }
 
-            return Task.FromResult(new Unit());
+            return Task.FromResult(true);
 
         }
 
         // 同上，RemoveStudentCommand 的处理方法
-        public Task<Unit> Handle(RemoveStudentCommand message, CancellationToken cancellationToken)
+        public Task<bool> Handle(RemoveStudentCommand message, CancellationToken cancellationToken)
         {
             if (!message.IsValid())
             {
                 NotifyValidationErrors(message);
-                return Task.FromResult(new Unit());
+                return Task.FromResult(false);
 
             }
 
@@ -153,7 +155,7 @@ namespace Christ3D.Domain.CommandHandlers
                 Bus.RaiseEvent(new StudentRemovedEvent(message.Id));
             }
 
-            return Task.FromResult(new Unit());
+            return Task.FromResult(true);
 
         }
 

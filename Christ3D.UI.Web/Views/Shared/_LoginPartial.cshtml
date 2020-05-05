@@ -1,24 +1,39 @@
-﻿
-@inject Microsoft.AspNetCore.Identity.SignInManager<Christ3D.Infrastruct.Identity.Models.ApplicationUser> SignInManager
-@inject Microsoft.AspNetCore.Identity.UserManager<Christ3D.Infrastruct.Identity.Models.ApplicationUser> UserManager
+﻿@using Christ3D
+@inject Christ3D.Domain.Interfaces.IUser SignInManager
+@inject Microsoft.Extensions.Configuration.IConfiguration _configuration
 
-@if (SignInManager.IsSignedIn(User))
+@if (SignInManager.IsAuthenticated())
 {
-    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
-            </li>
-        </ul>
-    </form>
+    if (_configuration["Authentication:IdentityServer4:Enabled"].ObjToBool())
+    {
+        <form asp-area="" asp-controller="Home" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="https://ids.neters.club/" title="Manage">Hello @SignInManager.Name!</a>
+                </li>
+                <li>
+                    <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+                </li>
+            </ul>
+        </form>
+    }
+    else
+    {
+        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @SignInManager.Name!</a>
+                </li>
+                <li>
+                    <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+                </li>
+            </ul>
+        </form>
+    }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+        <li><a asp-area="" asp-controller="Home" asp-action="Login">Log in</a></li>
     </ul>
 }

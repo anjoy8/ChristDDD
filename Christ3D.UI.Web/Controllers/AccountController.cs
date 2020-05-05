@@ -38,7 +38,7 @@ namespace Christ3D.UI.Web.Controllers
         public string ErrorMessage { get; set; }
 
         [HttpGet]
-        [Route("account/login")]
+        [Route("oauth2/authorize")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
@@ -50,7 +50,7 @@ namespace Christ3D.UI.Web.Controllers
         }
 
         [HttpPost]
-        [Route("account/login")]
+        [Route("oauth2/authorize")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
@@ -452,7 +452,7 @@ namespace Christ3D.UI.Web.Controllers
 
 
         [HttpGet]
-        //[Route("account/access-denied")]
+        [Route("account/access-denied")]
         public IActionResult AccessDenied()
         {
             return View();
