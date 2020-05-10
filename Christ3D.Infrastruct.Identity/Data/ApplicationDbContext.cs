@@ -23,9 +23,9 @@ namespace Christ3D.Infrastruct.Identity.Data
                 .Build();
 
             // define the database to use
-            // 因为我使用的是txt文件，所以用的是 File.ReadAllText() ，如果你直接配置的是字符串，可以直接这么写：
-            //optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
-            optionsBuilder.UseSqlServer(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
+            // 因为我使用的是txt文件，所以用的是 File.ReadAllText() ，这里不用写，因为web层的IdentitySetup.cs已经配置过了
+            //optionsBuilder.UseSqlServer(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
+            //optionsBuilder.UseMySql(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
         }
     }
 }

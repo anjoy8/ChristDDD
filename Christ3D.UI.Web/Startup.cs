@@ -14,14 +14,20 @@ namespace Christ3D.UI.Web
     public class Startup
     {
         /*
+         * mysql和sqlserver的迁移操作步骤一致，不过本项目的迁移文件已经迁移好，在Data文件夹下：
+         * msql使用MigrationsMySql文件夹下的迁移记录，卸载另一个Migrations文件夹
+         * sqlserver使用Migrations文件夹下的迁移记录，卸载另一个MigrationsMySql文件夹
+         * 
+         * 当然你也可以都删掉，自己重新做迁移。
+         * 
          一、迁移项目1（一定要切换到 Christ3D.Infrastruct 项目下，使用 Package Manager Console）：
-           1、add-migration InitStudentDb -Context StudyContext 
-           2、add-migration InitEventStoreDb -Context EventStoreSQLContext -o Migrations/EventStore
+           1、add-migration InitStudentDbMysql -Context StudyContext  -o MigrationsMySql
+           2、add-migration InitEventStoreDbMysql -Context EventStoreSQLContext -o MigrationsMySql/EventStore
            3、update-database -Context StudyContext
            4、update-database -Context EventStoreSQLContext
 
          二、迁移项目2【弃用，因为现在是使用IdentityServer4】（一定要切换到 Christ3D.Infrastruct.Identity 项目下，使用 Package Manager Console）：
-           1、add-migration InitIdentityDb -Context ApplicationDbContext -o Data/Migrations/ 
+           1、add-migration InitIdentityDbMysql -Context ApplicationDbContext -o Data/MigrationsMySql/ 
            2、update-database -Context ApplicationDbContext
              
         */
