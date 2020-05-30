@@ -32,8 +32,17 @@ namespace Christ3D.Infra.Data.Context
                 .Build();
 
             // 使用默认的sql数据库连接
-            //optionsBuilder.UseSqlServer(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
-            optionsBuilder.UseMySql(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
+            //
+           
+            if (config.GetConnectionString("IsMysql").ObjToBool())
+            {
+                optionsBuilder.UseMySql(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
+            }
+            else
+            {
+                optionsBuilder.UseSqlServer(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
+            }
+
         }
     }
 }

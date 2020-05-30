@@ -40,8 +40,14 @@ namespace Christ3D.Infra.Data.Context
 
             // 定义要使用的数据库
             //我是读取的文件内容，为了数据安全
-            //optionsBuilder.UseSqlServer(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
-            optionsBuilder.UseMySql(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
+            if (config.GetConnectionString("IsMysql").ObjToBool())
+            {
+                optionsBuilder.UseMySql(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
+            }
+            else
+            {
+                optionsBuilder.UseSqlServer(DbConfig.InitConn(config.GetConnectionString("DefaultConnection_file"), config.GetConnectionString("DefaultConnection")));
+            }
         }
     }
 }

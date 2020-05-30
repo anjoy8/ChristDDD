@@ -17,18 +17,22 @@ namespace Christ3D.UI.Web.Extensions
     public static class IdentitySetup
     {
 
-        public static void AddIdentitySetup(this IServiceCollection services,IConfiguration Configuration)
+        public static void AddIdentitySetup(this IServiceCollection services, IConfiguration Configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
-
-               //options.UseSqlServer(DbConfig.InitConn(Configuration.GetConnectionString("DefaultConnection_file"), Configuration.GetConnectionString("DefaultConnection")))
-
-               options.UseMySql(DbConfig.InitConn(Configuration.GetConnectionString("DefaultConnection_file"), Configuration.GetConnectionString("DefaultConnection")))
-
-               );
+            {
+                if (Configuration.GetConnectionString("IsMysql").ObjToBool())
+                {
+                    options.UseMySql(DbConfig.InitConn(Configuration.GetConnectionString("DefaultConnection_file"), Configuration.GetConnectionString("DefaultConnection")));
+                }
+                else
+                {
+                    options.UseSqlServer(DbConfig.InitConn(Configuration.GetConnectionString("DefaultConnection_file"), Configuration.GetConnectionString("DefaultConnection")));
+                }
+            });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
