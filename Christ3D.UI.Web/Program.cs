@@ -24,6 +24,7 @@ namespace Christ3D.UI.Web
           .ConfigureWebHostDefaults(webBuilder =>
           {
               webBuilder
+              .UseUrls("http://*:4773")
               .UseStartup<Startup>();
           });
     }
