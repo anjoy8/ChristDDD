@@ -38,6 +38,12 @@
     <ProjectReference Include="..\Christ3D.Application\Christ3D.Application.csproj" />
     <ProjectReference Include="..\Christ3D.Infrastruct.Identity\Christ3D.Infrastruct.Identity.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   
   
   
