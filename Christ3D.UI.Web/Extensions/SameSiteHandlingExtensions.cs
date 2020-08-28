@@ -12,15 +12,15 @@ namespace Christ3D.UI.Web.Extensions
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.MinimumSameSitePolicy = (SameSiteMode)(-1);
-                options.OnAppendCookie = cookieContext => 
+                options.OnAppendCookie = cookieContext =>
                     CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
-                options.OnDeleteCookie = cookieContext => 
+                options.OnDeleteCookie = cookieContext =>
                     CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
             });
 
             return services;
         }
-        
+
         private static void CheckSameSite(HttpContext httpContext, CookieOptions options)
         {
             if (options.SameSite == SameSiteMode.None)
@@ -51,7 +51,7 @@ namespace Christ3D.UI.Web.Extensions
             // This does not include:
             // - Chrome on Mac OS X
             // Because they do not use the Mac OS networking stack.
-            if (userAgent.Contains("Macintosh; Intel Mac OS X 10_14") && 
+            if (userAgent.Contains("Macintosh; Intel Mac OS X 10_14") &&
                 userAgent.Contains("Version/") && userAgent.Contains("Safari"))
             {
                 return true;
@@ -61,7 +61,7 @@ namespace Christ3D.UI.Web.Extensions
             // and none in this range require it.
             // Note: this covers some pre-Chromium Edge versions, 
             // but pre-Chromium Edge does not require SameSite=None.
-            if (userAgent.Contains("Chrome/5") || userAgent.Contains("Chrome/6"))
+            if (userAgent.Contains("Chrome"))
             {
                 return true;
             }
